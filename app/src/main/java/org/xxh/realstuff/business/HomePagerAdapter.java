@@ -3,6 +3,9 @@ package org.xxh.realstuff.business;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -12,23 +15,34 @@ import java.util.List;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
 
-    List<Fragment> mFragments;
+    List<Class<? extends Fragment>> mFragmentClazzs;
 
-    public HomePagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public HomePagerAdapter(FragmentManager fm, List<Class<? extends Fragment>> fragmentClazzs) {
         super(fm);
-        mFragments = fragments;
+        mFragmentClazzs = fragmentClazzs;
     }
 
     @Override
     public Fragment getItem(int position) {
-        if (mFragments != null) {
-            return mFragments.get(position);
+        Log.e("xxh","position");
+        Fragment fragment = null;
+        Class<? extends Fragment> clazz = mFragmentClazzs.get(position);
+        try {
+            fragment = clazz.newInstance();
+        } catch (Exception e) {
+            return null;
         }
-        return null;
+        return fragment;
     }
 
     @Override
     public int getCount() {
-        return mFragments != null ? mFragments.size() : 0;
+        return mFragmentClazzs != null ? mFragmentClazzs.size() : 0;
     }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        return super.instantiateItem(container, position);
+    }
+
 }

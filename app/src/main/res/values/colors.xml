@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="default_divider">@android:color/darker_gray</color>
 
+    <color name="white">@android:color/white</color>
     <color name="tab_normal">#33475f</color>
     <color name="tab_selected">#ea8010</color>
 </resources>

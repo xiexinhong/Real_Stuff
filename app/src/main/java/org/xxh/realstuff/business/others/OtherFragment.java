@@ -1,4 +1,4 @@
-package org.xxh.realstuff.business;
+package org.xxh.realstuff.business.others;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +13,7 @@ import org.xxh.realstuff.base.BaseFragment;
  * @author xiexinhong (xiexinhong@meituan.com) on 16/10/25.
  */
 
-public class NewFragment extends BaseFragment {
+public class OtherFragment extends BaseFragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class NewFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_new,container,false);
+        View contentView = inflater.inflate(R.layout.fragment_other,container,false);
         return contentView;
     }
 }

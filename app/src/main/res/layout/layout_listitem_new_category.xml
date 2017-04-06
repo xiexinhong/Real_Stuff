@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="30dp"
+             android:background="@drawable/bg_new_category_item"
+             android:minHeight="30dp"
+             android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/category_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/tab_normal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/white"
+        tools:text="分类"/>
+
+</FrameLayout>

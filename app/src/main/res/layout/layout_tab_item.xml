@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
 
     <TextView
         android:id="@+id/tab_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@drawable/bg_tab_txt"
-        android:text="最新"/>
-
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TabTextAppearance"
+        tools:text="最新"/>
 
     <ImageView
         android:id="@+id/tab_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_above="@id/tab_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         tools:src="@drawable/ic_tab_category"/>
-
-
 
 </RelativeLayout>

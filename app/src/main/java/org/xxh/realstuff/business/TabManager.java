@@ -1,12 +1,16 @@
 package org.xxh.realstuff.business;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.xxh.realstuff.R;
+import org.xxh.realstuff.business.categories.CategoryFragment;
+import org.xxh.realstuff.business.news.NewFragment;
+import org.xxh.realstuff.business.others.OtherFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +24,17 @@ public class TabManager {
     private List<View> mTabs;
     private int[] mTxtIds;
     private int[] mIconIds;
+    private List<Class<? extends Fragment>> mFragmentClzzs;
     private static final int TAB_SIZE = 3;
 
     private TabManager() {
-        mTxtIds = new int[]{R.string.tab_new,R.string.tab_category,R.string.tab_other};
-        mIconIds = new int[]{R.drawable.ic_tab_new,R.drawable.ic_tab_category,R.drawable.ic_tab_other};
+        mTxtIds = new int[]{R.string.tab_new, R.string.tab_category, R.string.tab_other};
+        mIconIds = new int[]{R.drawable.ic_tab_new, R.drawable.ic_tab_category, R.drawable
+                .ic_tab_other};
+        mFragmentClzzs = new ArrayList<>();
+        mFragmentClzzs.add(NewFragment.class);
+        mFragmentClzzs.add(CategoryFragment.class);
+        mFragmentClzzs.add(OtherFragment.class);
     }
 
     private static class TabManagerHolder {
@@ -40,6 +50,10 @@ public class TabManager {
             initTabs(context);
         }
         return mTabs;
+    }
+
+    public List<Class<? extends Fragment>> getFragmentClazzs() {
+        return mFragmentClzzs;
     }
 
     private void initTabs(Context context) {
