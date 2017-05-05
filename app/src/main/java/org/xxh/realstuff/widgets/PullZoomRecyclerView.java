@@ -1,6 +1,4 @@
-package org.xxh.realstuff.widget;
-
-
+package org.xxh.realstuff.widgets;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

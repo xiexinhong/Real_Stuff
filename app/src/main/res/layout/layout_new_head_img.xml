@@ -3,17 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/sdv_top_beauty_girl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:actualImageScaleType="centerCrop"
-        app:failureImage="@drawable/img_net_request_fail"
-        app:failureImageScaleType="centerCrop"
-        app:placeholderImage="@drawable/img_net_request_fail"
-        app:placeholderImageScaleType="centerCrop"/>
+        android:src="@drawable/img_net_request_fail"/>
+
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+        <!--android:id="@+id/sdv_top_beauty_girl"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:actualImageScaleType="centerCrop"-->
+        <!--app:failureImage="@drawable/img_net_request_fail"-->
+        <!--app:failureImageScaleType="centerCrop"-->
+        <!--app:placeholderImage="@drawable/img_net_request_fail"-->
+        <!--app:placeholderImageScaleType="centerCrop"/>-->
 
 </FrameLayout>
 

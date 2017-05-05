@@ -1,4 +1,4 @@
-package org.xxh.realstuff.widget;
+package org.xxh.realstuff.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
- * @author xiexinhong (xiexinhong@meituan.com) on 16/12/16.
+ *
+ * @author dinus
  */
 public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
-
     protected static final long ZOOM_BACK_DURATION = 300L;
 
     private static final float FRICTION = 2.5f;
@@ -48,7 +48,7 @@ public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
         init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
+    private void init(Context context, AttributeSet attrs){
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mMode = createDefaultPullZoomModel();
 
@@ -106,7 +106,7 @@ public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
                 : Math.round(Math.max(mInitTouchY - mLastTouchY, 0) / FRICTION);
         pullZoomEvent(scrollValue);
 
-        if (mOnPullZoomListener != null) {
+        if (mOnPullZoomListener != null){
             mOnPullZoomListener.onPullZooming(scrollValue);
         }
 
@@ -115,11 +115,11 @@ public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
 
     private boolean onPullStartActionCancel() {
         isPullStart = false;
-        if (isZooming) {
+        if (isZooming){
             isZooming = false;
             smoothScrollToTop();
 
-            if (mOnPullZoomListener != null) {
+            if (mOnPullZoomListener != null){
                 final float scrollValue = mMode == ZOOM_HEADER ?
                         Math.round(Math.min(mInitTouchY - mLastTouchY, 0) / FRICTION)
                         : Math.round(Math.max(mInitTouchY - mLastTouchY, 0) / FRICTION);
@@ -133,11 +133,11 @@ public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
 
-        if (!isZoomEnable) {
+        if (!isZoomEnable){
             return false;
         }
 
-        if (event.getAction() == MotionEvent.ACTION_MOVE && isPullStart) {
+        if (event.getAction() == MotionEvent.ACTION_MOVE && isPullStart){
             return true;
         }
 
@@ -146,9 +146,9 @@ public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
     }
 
     private void performInterceptAction(MotionEvent event) {
-        switch (event.getAction()) {
+        switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                if (isReadyZoom()) {
+                if (isReadyZoom()){
                     onZoomReadyActionDown(event);
                 }
                 break;
@@ -183,11 +183,11 @@ public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
 
         Log.i("debug", "mMode" + mMode + "yDistance " + yDistance + "xDistance " + xDistance);
         if (mMode == ZOOM_HEADER && yDistance > mTouchSlop && yDistance > Math.abs(xDistance)
-                || mMode == ZOOM_FOOTER && -yDistance > mTouchSlop && -yDistance > Math.abs(xDistance)) {
+                || mMode == ZOOM_FOOTER && -yDistance > mTouchSlop && -yDistance > Math.abs(xDistance)){
             mLastTouchY = mCurrentY;
             mLastTouchX = mCurrentX;
 
-            if (mOnPullZoomListener != null) {
+            if (mOnPullZoomListener != null){
                 mOnPullZoomListener.onPullStart();
             }
             isPullStart = true;
@@ -230,8 +230,8 @@ public abstract class PullZoomBaseView<T extends View> extends LinearLayout {
 
     /**
      * @param scrollValue vertical distance scrolled in pixels
-     *                    if scrollValue < 0  ; scroll up
-     *                    if scrollValue > 0  ; scroll down
+     *          if scrollValue < 0  ; scroll up
+     *          if scrollValue > 0  ; scroll down
      */
     protected abstract void pullZoomEvent(float scrollValue);
 

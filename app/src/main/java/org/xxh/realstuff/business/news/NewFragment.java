@@ -1,6 +1,5 @@
 package org.xxh.realstuff.business.news;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -10,11 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.xxh.realstuff.R;
 import org.xxh.realstuff.base.BaseFragment;
@@ -22,8 +16,7 @@ import org.xxh.realstuff.model.HomeEntity;
 import org.xxh.realstuff.model.Recommend;
 import org.xxh.realstuff.net.Api;
 import org.xxh.realstuff.net.api.RealStuffService;
-import org.xxh.realstuff.widget.PullZoomBaseView;
-import org.xxh.realstuff.widget.PullZoomRecyclerView;
+import org.xxh.realstuff.widgets.PullZoomRecyclerView;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,14 +24,15 @@ import java.util.List;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 
+import static org.xxh.realstuff.widgets.PullZoomBaseView.ZOOM_HEADER;
+
+
 /**
  * @author xiexinhong (xiexinhong@meituan.com) on 16/10/25.
  */
 
 public class NewFragment extends BaseFragment implements View.OnClickListener {
 
-    private static final float ASPECT_RATIO = 10.0f / 13.0f;
-    private SimpleDraweeView mBeautyGirlSdv;
     private PullZoomRecyclerView mToadyContentPzrv;
     private RecyclerView mTodayContentRv;
     private LinkedHashMap<String, List<Recommend>> mTodayData = new LinkedHashMap<>();
@@ -58,29 +52,19 @@ public class NewFragment extends BaseFragment implements View.OnClickListener {
         View contentView = inflater.inflate(R.layout.fragment_new, container, false);
 
         mToadyContentPzrv = (PullZoomRecyclerView) contentView;
+        mToadyContentPzrv.setModel(ZOOM_HEADER);
         mTodayContentRv = mToadyContentPzrv.getRecyclerView();
 
-        FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.layout_new_head_img,mToadyContentPzrv,false);
-        mBeautyGirlSdv = (SimpleDraweeView) frameLayout.findViewById(R.id.sdv_top_beauty_girl);
-        mBeautyGirlSdv.setAspectRatio(ASPECT_RATIO);
-
-        mToadyContentPzrv.setModel(mToadyContentPzrv.getLayoutMode());
-        mToadyContentPzrv.setZoomView(mBeautyGirlSdv);
-        mToadyContentPzrv.setHeaderContainer(frameLayout);
-
         mTodayContentRv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new NewContentAdapter(getActivity());
+        mAdapter = new NewContentAdapter(mToadyContentPzrv,getActivity());
         mTodayContentRv.setAdapter(mAdapter);
-//        ImageView refreshView = (ImageView) contentView.findViewById(R.id.iv_refresh);
-//
-//        refreshView.setOnClickListener(this);
-        return new TextView(getActivity());
+        return contentView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        getTodayContent();
+        getTodayContent();
     }
 
     @Override
@@ -127,9 +111,10 @@ public class NewFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void refreshUI() {
-//        if (mWelfares != null && mWelfares.get(0) != null) {
-//            mBeautyGirlSdv.setImageURI(mWelfares.get(0).url);
-//        }
-        mAdapter.setDataAndNotify(mTodayData);
+        String url = null;
+        if (mWelfares != null && mWelfares.get(0) != null) {
+            url = mWelfares.get(0).url;
+        }
+        mAdapter.setDataAndNotify(url,mTodayData);
     }
 }
